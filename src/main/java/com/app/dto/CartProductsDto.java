@@ -1,23 +1,17 @@
 package com.app.dto;
 
+import com.app.entities.ProductDetails;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
-@ToString
-public class CompanyLoginDto {
-	
-	
-	
-	private String username;
-	
-	private String password;
-	
-	
+@Getter
+public class CartProductsDto {
+	ProductDetails product;
+	int quantity;
 }

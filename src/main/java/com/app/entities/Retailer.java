@@ -1,15 +1,7 @@
 package com.app.entities;
 
-import java.util.List;
-
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -80,17 +72,7 @@ public class Retailer extends BaseEntity{
 //    private String deliveryAddressPinCode;
     
     
-	 @Embedded
-	    @AttributeOverrides({
-	    		@AttributeOverride(name = "shopNo", column = @Column(name = "address_shop_no")),
-	            @AttributeOverride(name = "streetName", column = @Column(name = "address_street")),
-	            @AttributeOverride(name = "locality", column = @Column(name = "address_locality")),
-	            @AttributeOverride(name = "city", column = @Column(name = "address_city")),
-	            @AttributeOverride(name = "state", column = @Column(name = "address_state")),
-	            @AttributeOverride(name = "pincode", column = @Column(name = "address_pin_code"))
-	    })
-	    private DeliveryAddress address;
-	 
+	
 	 
 	
 	public Retailer(
@@ -109,14 +91,14 @@ public class Retailer extends BaseEntity{
 		this.alternateMobNumber = alternateMobNumber;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "retailer",cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<RAddress> rAddrList;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "retailer",cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Order> orderList;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "retailer",cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Cart> cartItemsList;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "retailer",cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<RAddress> rAddrList;
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "retailer",cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Order> orderList;
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "retailer",cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Cart> cartItemsList;
 	
 
 }

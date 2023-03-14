@@ -48,7 +48,7 @@ public class RAddress extends BaseEntity{
     @Size(min = 6, max = 6)
     private String pincode;
 	
-	private boolean isDefault;
+	private Boolean isDefault;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="retailer_id", nullable = false)

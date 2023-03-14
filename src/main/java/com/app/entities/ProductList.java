@@ -5,10 +5,22 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "product_list")
+@NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString
 public class ProductList extends BaseEntity {
 	
 	@NotNull(message = "Quantity cannot be null.")

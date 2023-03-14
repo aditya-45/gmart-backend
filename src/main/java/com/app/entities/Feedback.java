@@ -29,7 +29,7 @@ public class Feedback extends BaseEntity{
 	
 	@NotNull
 	@NotBlank
-	@Column(name = "email_id",length = 20, unique = true, nullable = false)
+	@Column(name = "email_id",length = 20, nullable = false)
 	@Email(message = "Invalid email format")
     private String emailId;
 	

@@ -2,6 +2,7 @@ package com.app.service;
 
 import javax.transaction.Transactional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +11,19 @@ import com.app.dto.CompanyDto;
 import com.app.dto.CompanyLoginDto;
 import com.app.entities.Company;
 import com.app.repository.CompanyRepository;
+import com.app.repository.ProductDetailsRepository;
 
 @Service
 @Transactional
 public class CompanyServiceImpl implements CompanyService{
 	@Autowired
 	private CompanyRepository companyRepo;
+	
+	@Autowired
+	private ProductDetailsRepository productRepo;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 	
 	@Override
 	public Company addCompany(CompanyDto company) {
@@ -42,4 +50,37 @@ public class CompanyServiceImpl implements CompanyService{
 		}
 		return false;
 	}
+	
+	@Override
+	public Long getCompanyIdByUsername(String username) {
+		Company company = companyRepo.findByUsername(username);
+		return company.getId();
+	}
+
+	@Override
+	public void deleteAccount(Long companyId) {
+		productRepo.deleteByCompanyId(companyId);
+		companyRepo.deleteById(companyId);		
+	}
+
+	@Override
+	public CompanyDto getAccountDetails(Long commpanyId) {
+		return modelMapper.map(companyRepo.findById(commpanyId), CompanyDto.class);
+	}
+
+	@Override
+	public CompanyDto editAccountDetails(CompanyDto companyDto,Long companyId) {
+		Company company=companyRepo.findById(companyId).get();
+		
+		company.setAddress(companyDto.getAddress());
+		company.setAlternateMobNumber(companyDto.getAlternateMobNumber());
+		company.setCompanyName(companyDto.getCompanyName());
+		company.setContactNumber(companyDto.getContactNumber());
+		company.setEmail(companyDto.getEmail());
+		company.setPassword(companyDto.getPassword());
+		
+		return modelMapper.map(companyRepo.save(company), CompanyDto.class);
+	}
+
+	
 }

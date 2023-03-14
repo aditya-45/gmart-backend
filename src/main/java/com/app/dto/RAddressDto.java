@@ -1,7 +1,5 @@
 package com.app.dto;
 
-import com.app.entities.Role;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,11 +11,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FeedbackDTO {
-	 private String name;
-	 private String emailId;
-	 private String phoneNo;
-	 private Role role;
-	 private int rating;
-	 private String description;
+public class RAddressDto {
+	private Long id;
+	private String shopNo;
+	private String streetName;
+	private String locality;
+	private String city;
+	private String state;
+	private String pincode;
 }

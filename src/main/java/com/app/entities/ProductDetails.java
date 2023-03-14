@@ -1,7 +1,4 @@
 package com.app.entities;
-import java.math.BigDecimal;
-
-import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,9 +13,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +24,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(exclude = {"image1","image2","image3"})
+@ToString(exclude = {"image1"})
 @AllArgsConstructor
 public class ProductDetails extends BaseEntity {
 	
@@ -41,13 +35,12 @@ public class ProductDetails extends BaseEntity {
 
     @NotNull(message = "MRP cannot be null")
     @DecimalMin(value = "0.01", message = "MRP must be greater than 0")
-    private BigDecimal mrp;
+    private double mrp;
 
     @DecimalMax(value = "100.00", message = "Discount cannot be greater than 100%")
     @DecimalMin(value = "0.00", message = "Discount cannot be negative")
-    private BigDecimal discount;
+    private double discount;
 
-    @NotBlank(message = "Category cannot be blank")
     @NotNull(message = "Category cannot be blank")
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -64,18 +57,17 @@ public class ProductDetails extends BaseEntity {
 
     private boolean isAvailable = true;
     
-    @NotNull
-    @NotBlank(message = "Image path cannot be blank")
+    
     private String image1;
-
-    private String image2;
-
-    private String image3;
     
     @ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "company_id", nullable = false) // FK
    // @JsonProperty(access = Access.WRITE_ONLY)
 	private Company company;
+
+	
+    
+    
     
     
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product",cascade = CascadeType.ALL, orphanRemoval = true)

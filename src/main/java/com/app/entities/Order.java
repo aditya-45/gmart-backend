@@ -1,10 +1,7 @@
 package com.app.entities;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,11 +9,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,9 +29,10 @@ import lombok.ToString;
 @ToString
 public class Order extends BaseEntity {
 
-    @NotNull(message = "Order date cannot be null.")
-    @PastOrPresent(message = "Order date cannot be in the future.")
+//    @NotNull(message = "Order date cannot be null.")
+//    @PastOrPresent(message = "Order date cannot be in the future.")
     @Column(name="order_date")
+    @CreationTimestamp
     private LocalDate orderDate; //@createTimeStamp
 
     @NotNull(message = "Order status cannot be null.")
@@ -42,12 +41,12 @@ public class Order extends BaseEntity {
     private OrderStatus orderStatus; //we are not allowing user to fill this field so @NotNull is 
     //not required
 
-    @NotNull(message = "Estimated delivery date cannot be null.")
+//    @NotNull(message = "Estimated delivery date cannot be null.")
     private LocalDate estimatedDeliveryDate; //same for this
 
     @NotNull(message = "Total price cannot be null.")
     @Positive(message = "Total price must be positive.")
-    private BigDecimal totalPrice;   //not null is not required
+    private double totalPrice;   //not null is not required
 
     private LocalDate deliveryDate;
 
@@ -57,7 +56,7 @@ public class Order extends BaseEntity {
 
 	public Order(
 			@NotNull(message = "Estimated delivery date cannot be null.") LocalDate estimatedDeliveryDate,
-			@NotNull(message = "Total price cannot be null.") @Positive(message = "Total price must be positive.") BigDecimal totalPrice,
+			@NotNull(message = "Total price cannot be null.") @Positive(message = "Total price must be positive.") double totalPrice,
 			LocalDate deliveryDate,
 			@NotNull(message = "Total quantity cannot be null.") @Positive(message = "Total quantity must be positive.") Integer totalQuantity) {
 		super();
@@ -70,10 +69,10 @@ public class Order extends BaseEntity {
 	}
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ProductList> prodList;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<ProductList> prodList;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "retailer_id", nullable = false) // FK
 	private Retailer retailer;
     

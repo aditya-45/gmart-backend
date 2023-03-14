@@ -1,15 +1,10 @@
 package com.app.entities;
 
-import java.util.List;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -46,11 +41,6 @@ public class Company extends BaseEntity {
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
-//	@NotBlank(message = "Mobile Number cannot be blank")
-//	@NotNull
-//	@Column(name="mob_no",length = 20)
-//	@Pattern(regexp = "^\\d{10}$")
-//	private String mobileNo;
 	
 	@NotBlank(message = "Email cannot be blank")
 	@Email(message = "Invalid email format")

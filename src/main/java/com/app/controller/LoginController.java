@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.CompanyDto;
 import com.app.dto.CompanyLoginDto;
-import com.app.dto.RetailerDto;
 import com.app.dto.RetailerLoginDto;
 import com.app.service.CompanyServiceImpl;
 import com.app.service.RetailerServiceImpl;
@@ -35,8 +33,9 @@ public class LoginController {
 		System.out.println("in login controller retailer method");
 		System.out.println(retailer.getUsername() + " " + retailer.getPassword());
 		if(!retailerService.validRetailer(retailer))
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(retailer);
-		return ResponseEntity.ok().body(retailer);
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username and password");
+		Long retailerId = retailerService.getRetailerIdByUsername(retailer.getUsername());
+		return ResponseEntity.ok().body(retailerId);
 	}
 	
 	@PostMapping("/company")
@@ -44,8 +43,9 @@ public class LoginController {
 		System.out.println("in login controller company method");
 		System.out.println(company.getUsername() + " " + company.getPassword());
 		if(!companyService.validCompany(company))
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(company);
-		return ResponseEntity.ok().body(company);
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username and password");
+		Long companyId = companyService.getCompanyIdByUsername(company.getUsername());
+		return ResponseEntity.ok().body(companyId);
 	}
 	
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.CompanyDto;
-import com.app.dto.RetailerDto;
+import com.app.dto.RetailerNAddressDto;
 import com.app.service.CompanyServiceImpl;
 import com.app.service.RetailerServiceImpl;
 
@@ -29,8 +29,9 @@ public class SignUpController {
 	private CompanyServiceImpl companyService;
 	
 	@PostMapping("/retailer")
-	public ResponseEntity<?> registerRetailer(@RequestBody @Valid RetailerDto retailer){
+	public ResponseEntity<?> registerRetailer(@RequestBody @Valid RetailerNAddressDto retailer){
 		System.out.println("in sign up controller retailer method");
+		System.out.println(retailer.toString());
 		return ResponseEntity.status(HttpStatus.CREATED).body(retailerService.addRetailer(retailer));
 	}
 	

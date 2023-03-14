@@ -9,4 +9,6 @@ public interface RetailerRepository extends JpaRepository<Retailer, Long> {
 	boolean existsByUsername(String username);
 	
 	boolean existsByUsernameAndPassword(String username, String password);
+	
+	Retailer findByUsername(String username);
 }
