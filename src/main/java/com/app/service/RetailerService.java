@@ -14,7 +14,10 @@ import com.app.entities.RAddress;
 import com.app.entities.Retailer;
 
 public interface RetailerService {
-Retailer addRetailer(RetailerNAddressDto retailerNAddressDto);
+	
+	boolean existingRetailer(String username);
+	
+	Retailer addRetailer(RetailerNAddressDto retailerNAddressDto);
 	
 	boolean validRetailer(RetailerLoginDto retailer);
 	
@@ -41,4 +44,8 @@ Retailer addRetailer(RetailerNAddressDto retailerNAddressDto);
 	List<Order> myOrder(Long retailerId);
 
 	String trackOrder(Long orderId);
+	
+	List<RAddressDto> retailStore(String pincode);
+
+
 }

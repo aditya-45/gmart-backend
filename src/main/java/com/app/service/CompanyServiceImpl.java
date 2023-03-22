@@ -82,5 +82,21 @@ public class CompanyServiceImpl implements CompanyService{
 		return modelMapper.map(companyRepo.save(company), CompanyDto.class);
 	}
 
+	@Override
+	public boolean existsCompanyUsername(String username) {
+		if(companyRepo.existsByUsername(username)) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean existsCompanyName(String companyName) {
+		if(companyRepo.existsByCompanyName(companyName)) {
+			return true;
+		}
+		return false;
+	}
+
 	
 }

@@ -29,7 +29,7 @@ public class Retailer extends BaseEntity{
 	@NotBlank(message = "Full name cannot be blank")
 	@NotNull(message = "Enter valid name")
 	@Column(name = "full_name", length = 20)
-	@Length(min = 4, max = 20, message="Number of characters in name field should be between 3 to 20")
+	@Length(min = 4, max = 20, message="Number of characters in name field should be between 4 to 20")
 	private String fullName;
 	
 	

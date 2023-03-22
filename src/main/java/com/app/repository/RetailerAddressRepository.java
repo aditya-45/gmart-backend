@@ -13,5 +13,6 @@ public interface RetailerAddressRepository extends JpaRepository<RAddress, Long>
 	Optional<RAddress> findByIdAndIsDefaultIsFalse(Long addressId);
 	boolean existsByIdAndIsDefaultIsFalse(Long addressId);
 	void deleteByRetailerId(Long retailerid);
+	List<RAddress> findAllByPincode(String pincode);
 
 }

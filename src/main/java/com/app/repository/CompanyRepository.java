@@ -10,4 +10,6 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
 	boolean existsByUsernameAndPassword(String username, String password);
 	
 	Company findByUsername(String username);
+	
+	boolean existsByCompanyName(String companyName);
 }

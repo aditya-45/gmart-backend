@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.entities.Category;
 import com.app.service.ImageHandlingService;
 import com.app.service.ProductDetailsService;
+import com.app.service.RetailerService;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -24,6 +25,9 @@ public class CategoryController {
 
 	@Autowired
 	private ImageHandlingService imgService;
+	
+	@Autowired
+	private RetailerService retailerService;
 	
 	@GetMapping("/category/{name}")
 	public ResponseEntity<?> registerCompany(@PathVariable Category name ){
@@ -36,5 +40,10 @@ public class CategoryController {
  			MediaType.IMAGE_PNG_VALUE})
 	public ResponseEntity<?> showImage(@PathVariable long productId) throws IOException {
 		return new ResponseEntity<>(imgService.showProductImage(productId),HttpStatus.OK);
+	}
+	
+	@GetMapping("/retailStore/{pincode}")
+	public ResponseEntity<?> retailStore(@PathVariable String pincode) {
+		return ResponseEntity.status(HttpStatus.OK).body(retailerService.retailStore(pincode));
 	}
 }

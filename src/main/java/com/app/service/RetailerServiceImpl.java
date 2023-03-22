@@ -48,6 +48,8 @@ public class RetailerServiceImpl implements RetailerService{
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	
+	
 	@Override
 	public Retailer addRetailer(RetailerNAddressDto retailerNAddressDto) {
 		System.out.println("Reached in service layer to add a retailer");
@@ -252,4 +254,19 @@ public class RetailerServiceImpl implements RetailerService{
 		order = updateOrderStatus(order);
 		return order.getOrderStatus().toString();
 	}
+
+	@Override
+	public boolean existingRetailer(String username) {
+		if(retailerRepo.existsByUsername(username)) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public List<RAddressDto> retailStore(String pincode) {
+		List<RAddress> addresses = rAddressRepo.findAllByPincode(pincode);
+		return addresses.stream().map(address -> modelMapper.map(address, RAddressDto.class)).collect(Collectors.toList());
+	}
+
 }

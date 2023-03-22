@@ -32,6 +32,9 @@ public class SignUpController {
 	public ResponseEntity<?> registerRetailer(@RequestBody @Valid RetailerNAddressDto retailer){
 		System.out.println("in sign up controller retailer method");
 		System.out.println(retailer.toString());
+		if(retailerService.existingRetailer(retailer.getUsername())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("");
+		}
 		return ResponseEntity.status(HttpStatus.CREATED).body(retailerService.addRetailer(retailer));
 	}
 	
@@ -39,6 +42,12 @@ public class SignUpController {
 	@PostMapping("/company")
 	public ResponseEntity<?> registerCompany(@RequestBody @Valid CompanyDto company){
 		System.out.println("in sign up controller company method");
+		if(companyService.existsCompanyUsername(company.getUsername())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("");
+		}
+		if(companyService.existsCompanyName(company.getCompanyName())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("");
+		}
 		return ResponseEntity.status(HttpStatus.CREATED).body(companyService.addCompany(company));
 	}
 }
